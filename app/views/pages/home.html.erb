@@ -1,4 +1,56 @@
-<div class="container">
-  <h1>Pages#home</h1>
-  <p>Find me in app/views/pages/home.html.erb</p>
+<!-- Conteneur principal centré avec un espacement vertical -->
+<div class="container my-5" style="max-width: 600px;">
+
+  <!-- ========================================== -->
+  <!-- 1. En-tête / Titre et description          -->
+  <!-- ========================================== -->
+  <div class="text-center mb-4">
+    <!-- Icône ou emoji pop-corn / cinéma -->
+    <div class="display-4 mb-2">🍿</div>
+
+    <h1 class="h2 font-weight-bold">Quel film aimerais-tu regarder ?</h1>
+    <p class="text-muted font-italic mb-1">Décris ton humeur et tes envies.</p>
+    <p class="text-secondary small">Notre assistant IA t'aide à trouver le film idéal.</p>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 2. Boutons d'action principaux             -->
+  <!-- ========================================== -->
+  <div class="d-flex flex-column gap-3 mb-5">
+    <!-- Bouton pour démarrer une nouvelle recherche -->
+    <!-- Remplace '#' par ton path Rails une fois la route prête, ex: new_criteria_path -->
+    <%= link_to "Nouvelle recherche", "#", class: "btn btn-info text-white btn-lg shadow-sm w-100 rounded-pill py-2" %>
+
+    <!-- Bouton pour voir l'historique des recherches passées -->
+    <!-- Remplace '#' par la route correspondante, ex: conversations_path -->
+    <%= link_to "Historique des recherches", "#", class: "btn btn-warning text-dark btn-lg shadow-sm w-100 rounded-pill py-2" %>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 3. Section explicative : "Comment ça marche" -->
+  <!-- ========================================== -->
+  <div class="card p-4 border-0 shadow-sm rounded-4 bg-light">
+    <h2 class="h4 text-center mb-4 font-weight-bold">Comment ça marche</h2>
+
+    <div class="d-flex flex-column gap-3">
+      <!-- Étape 1 -->
+      <div class="text-center">
+        <h3 class="h6 font-weight-bold mb-1">1. Choisis tes critères</h3>
+        <p class="text-muted small mb-0">Un ou plusieurs genres, ambiances.</p>
+      </div>
+
+      <!-- Étape 2 -->
+      <div class="text-center">
+        <h3 class="h6 font-weight-bold mb-1">2. Discute avec l'IA</h3>
+        <p class="text-muted small mb-0">L'assistant affine tes goûts.</p>
+      </div>
+
+      <!-- Étape 3 -->
+      <div class="text-center">
+        <h3 class="h6 font-weight-bold mb-1">3. Découvre ton film</h3>
+        <p class="text-muted small mb-0">Une recommandation personnalisée.</p>
+      </div>
+    </div>
+  </div>
+
 </div>
