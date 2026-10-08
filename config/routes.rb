@@ -1,13 +1,4 @@
 Rails.application.routes.draw do
-  get "messages/index"
-  get "messages/create"
-  get "conversations/index"
-  get "conversations/create"
-  get "conversations/show"
-  get "conversations/destroy"
-  get "criterias/new"
-  get "criterias/show"
-  get "criterias/create"
   devise_for :users
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
