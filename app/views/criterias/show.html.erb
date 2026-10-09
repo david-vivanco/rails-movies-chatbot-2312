@@ -1,2 +1,26 @@
-<h1>Criterias#show</h1>
-<p>Find me in app/views/criterias/show.html.erb</p>
+<!-- Myriam / reprise du style de Fethi sur la home page
+<! Conteneur principal centré avec un espacement vertical -->
+<div class="container my-5" style="max-width: 800px;">
+
+  <!-- ========================================== -->
+  <!-- 1. En-tête / Titre et description          -->
+  <!-- ========================================== -->
+  <div class="text-center mb-4">
+    <!-- Icône ou emoji pop-corn / cinéma -->
+    <div class="display-4 mb-2">🍿Assistant Cinéma</div>
+
+    <p class="text-muted fst-italic mb-1">
+      Bonjour, tu recherches un film qui correspond à ces critères :
+      <%=@criteria.public%>,
+      <%=@criteria.ambiance%>,
+      <%=@criteria.duree%>,
+      <%=@criteria.popularite%>.
+      Je vais maintenant te poser quelques questions supplémentaires pour trouver le film idéal.
+    </p>
+  </div>
+
+<!-- PAS SURE DU TYPE DES BOUTONS / LINK-->
+<button type="discussion" class="btn btn-primary mt-3">Lancer la discussion</button>
+<p >Modifier mes critères</p>
+
+</div>

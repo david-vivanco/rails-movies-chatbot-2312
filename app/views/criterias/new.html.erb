@@ -1,2 +1,75 @@
-<h1>Criterias#new</h1>
-<p>Find me in app/views/criterias/new.html.erb</p>
+<!-- Myriam / reprise du style de Fethi sur la home page
+<! Conteneur principal centré avec un espacement vertical -->
+<div class="container my-5" style="max-width: 800px;">
+
+  <!-- ========================================== -->
+  <!-- 1. En-tête / Titre et description          -->
+  <!-- ========================================== -->
+  <div class="text-center mb-4">
+    <!-- Icône ou emoji pop-corn / cinéma -->
+    <div class="display-4 mb-2">🍿</div>
+
+    <h1 class="h2 font-weight-bold">Quelles sont tes préférences ?</h1>
+    <p class="text-muted font-italic mb-1">Quelques clics pour lancer ta recherche.</p>
+  </div>
+
+   <!-- ========================================== -->
+  <!-- 2. Section des critères -->
+  <!-- ========================================== -->
+
+<%= form_with model: @criteria, url: criterias_path do |form| %>
+  <div class="card p-4 border-0 shadow-sm rounded-4 bg-light" style="margin-bottom: 24px;">
+    <h2 class="text-start fs-4">Qui regarde le film ?</h2>
+    <% ["Moi", "En couple", "Les enfants", "Des amis"].each do |public| %>
+      <div>
+        <%= check_box_tag "criteria[public][]",
+                          public,
+                          @criteria.public&.include?(public),
+                          id: "criteria_public_#{public.parameterize}" %>
+        <%= label_tag "criteria_public_#{public.parameterize}", public %>
+      </div>
+   <% end %>
+   </div>
+
+  <div class="card p-4 border-0 shadow-sm rounded-4 bg-light" style="margin-bottom: 24px;">
+    <h2 class="text-start fs-4">Quelle ambiance recherches-tu ?</h2>
+    <% ["Drôle", "Romantique", "Suspense", "Réflexion", "Action", "Insolite"].each do |ambiance| %>
+      <div>
+        <%= check_box_tag "criteria[ambiance][]",
+                          ambiance,
+                          @criteria.ambiance&.include?(ambiance),
+                          id: "criteria_ambiance_#{ambiance.parameterize}" %>
+        <%= label_tag "criteria_ambiance_#{ambiance.parameterize}", ambiance %>
+      </div>
+    <% end %>
+    </div>
+
+    <div class="card p-4 border-0 shadow-sm rounded-4 bg-light" style="margin-bottom: 24px;">
+    <h2 class="text-start fs-4">De combien de temps diposes-tu ?</h2>
+    <% ["Moins d'1h", "Entre 1h et 2h", "Plus de 2h"].each do |duree| %>
+      <div>
+        <%= check_box_tag "criteria[duree][]",
+                          duree,
+                          @criteria.duree&.include?(duree),
+                          id: "criteria_duree_#{duree.parameterize}" %>
+        <%= label_tag "criteria_ambiance_#{duree.parameterize}", duree %>
+      </div>
+    <% end %>
+    </div>
+
+    <div class="card p-4 border-0 shadow-sm rounded-4 bg-light" style="margin-bottom: 24px;">
+    <h2 class="text-start fs-4">Plutôt blockbuster ou pépite inconnue ?</h2>
+    <% ["Succès commercial", "Succès critique", "Peu importe"].each do |popularite| %>
+      <div>
+        <%= check_box_tag "criteria[popularite][]",
+                          popularite,
+                          @criteria.popularite&.include?(popularite),
+                          id: "criteria_popularite_#{popularite.parameterize}" %>
+        <%= label_tag "criteria_popularite_#{popularite.parameterize}", popularite %>
+      </div>
+    <% end %>
+    </div>
+
+  <%= form.submit "Valider" %>
+<% end %>
+</div>>
