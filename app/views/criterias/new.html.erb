@@ -20,13 +20,13 @@
 <%= form_with model: @criteria, url: criterias_path do |form| %>
   <div class="card p-4 border-0 shadow-sm rounded-4 bg-light" style="margin-bottom: 24px;">
     <h2 class="text-start fs-4">Qui regarde le film ?</h2>
-    <% ["Moi", "En couple", "Les enfants", "Des amis"].each do |public| %>
+    <% ["Moi", "En couple", "Les enfants", "Des amis"].each do |audiance| %>
       <div>
-        <%= check_box_tag "criteria[public][]",
-                          public,
-                          @criteria.public&.include?(public),
-                          id: "criteria_public_#{public.parameterize}" %>
-        <%= label_tag "criteria_public_#{public.parameterize}", public %>
+        <%= check_box_tag "criteria[audiance][]",
+                          audiance,
+                          @criteria.audiance&.include?(audiance),
+                          id: "criteria_audiance_#{audiance.parameterize}" %>
+        <%= label_tag "criteria_audiance_#{audiance.parameterize}", audiance %>
       </div>
    <% end %>
    </div>

@@ -20,6 +20,6 @@ class CriteriasController < ApplicationController
   private
 
   def criteria_params
-    params.require(:criteria).permit(public: [], ambiance: [], duree: [], popularite: [])
+    params.require(:criteria).permit(audiance: [], ambiance: [], duree: [], popularite: [])
   end
 end
