@@ -1,2 +1,55 @@
-<h1>Criterias#show</h1>
-<p>Find me in app/views/criterias/show.html.erb</p>
+<!-- Myriam / reprise du style de Fethi sur la home page
+<! Conteneur principal centré avec un espacement vertical -->
+<div class="container my-5" style="max-width: 800px;">
+
+  <!-- ========================================== -->
+  <!-- 1. En-tête / Titre et description          -->
+  <!-- ========================================== -->
+  <div class="text-center mb-4">
+    <!-- Icône ou emoji pop-corn / cinéma -->
+    <div class="display-4 mb-5">🍿Assistant Cinéma</div>
+
+<div class="card p-4 border-0 shadow-sm rounded-4 bg-light">
+    <p class="text-muted mb-4">
+      <strong>Bonjour</strong>, tu recherches un film qui correspond à ces critères :
+    </p>
+
+  <div class="d-flex flex-wrap justify-content-center gap-2 mt-2">
+    <% @criteria.audiance.each do |audiance| %>
+      <div class="card p-2 shadow-sm">
+      <%= audiance %>
+      </div>
+    <% end %>
+
+    <% @criteria.ambiance.each do |ambiance| %>
+      <div class="card p-2 shadow-sm">
+        <%= ambiance %>
+      </div>
+    <% end %>
+
+    <% @criteria.duree.each do |duree| %>
+      <div class="card p-2 shadow-sm">
+        <%= duree %>
+      </div>
+    <% end %>
+
+    <% @criteria.popularite.each do |popularite| %>
+      <div class="card p-2 shadow-sm">
+        <%= popularite %>
+      </div>
+    <% end %>
+  </div>
+
+    <p class="text-muted mt-4">
+      Je vais maintenant te poser quelques questions supplémentaires pour trouver le film idéal.
+    </p>
+  </div>
+</div>
+<!-- PAS SURE DU TYPE DES BOUTONS / LINK-->
+<div class="text-center">
+  <%= button_to "Commencer la conversation",
+    criteria_conversations_path(@criteria),
+    method: :post,
+    class: "btn btn-primary" %>
+  <p> <%= link_to "Modifier mes critères", new_criteria_path, class: "text-decoration-none" %> </p>
+</div>
