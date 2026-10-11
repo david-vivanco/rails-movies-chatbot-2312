@@ -9,5 +9,7 @@ class ConversationsController < ApplicationController
   end
 
   def destroy
+    @conversation.destroy
+    redirect_to conversations_path
   end
 end
