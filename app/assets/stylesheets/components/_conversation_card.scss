@@ -1,0 +1,42 @@
+.conversation-card {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  background: white;
+  padding: 8px 16px;
+  border: 1px solid rgb(235,235,235);
+}
+
+.conversation-card .conversation-card-content {
+  flex-grow: 1;
+  padding: 0 24px;
+}
+
+.conversation-card p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.conversation-card small {
+  color: #999999;
+  font-weight: bold;
+}
+.conversation-card .conversation-card-actions {
+  opacity: 0;
+  display: flex;
+  transition: ease .2s;
+}
+
+.conversation-card:hover .conversation-card-actions {
+  opacity: 1;
+}
+
+.conversation-card .conversation-card-actions a {
+  color: #999999;
+  margin-left: 16px;
+  font-size: 14px;
+}
+
+.conversation-card .conversation-card-actions a:hover {
+  color: #555555;
+}

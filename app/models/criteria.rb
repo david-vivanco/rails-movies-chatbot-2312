@@ -1,4 +1,3 @@
 class Criteria < ApplicationRecord
-  # ??? has_one or has_many :conversations,
-  # dependant: :destroy
+  has_one :conversation, dependent: :destroy
 end

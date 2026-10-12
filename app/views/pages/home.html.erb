@@ -17,13 +17,11 @@
   <!-- 2. Boutons d'action principaux             -->
   <!-- ========================================== -->
   <div class="d-flex flex-column gap-3 mb-5">
-    <!-- Bouton pour démarrer une nouvelle recherche -->
-    <!-- Remplace '#' par ton path Rails une fois la route prête, ex: new_criteria_path -->
-    <%= link_to "Nouvelle recherche", "#", class: "btn btn-info text-white btn-lg shadow-sm w-100 rounded-pill py-2" %>
+    <!-- Bouton pour démarrer une nouvelle recherche relié à /criterias/new -->
+    <%= link_to "Nouvelle recherche", new_criteria_path, class: "btn btn-info text-white btn-lg shadow-sm w-100 rounded-pill py-2 font-weight-bold" %>
 
-    <!-- Bouton pour voir l'historique des recherches passées -->
-    <!-- Remplace '#' par la route correspondante, ex: conversations_path -->
-    <%= link_to "Historique des recherches", "#", class: "btn btn-warning text-dark btn-lg shadow-sm w-100 rounded-pill py-2" %>
+    <!-- Bouton pour voir l'historique relié à /conversations -->
+    <%= link_to "Historique des recherches", conversations_path, class: "btn btn-warning text-dark btn-lg shadow-sm w-100 rounded-pill py-2 font-weight-bold" %>
   </div>
 
   <!-- ========================================== -->

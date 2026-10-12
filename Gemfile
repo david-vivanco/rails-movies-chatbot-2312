@@ -48,6 +48,7 @@ gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
 gem "json", "<3"
 gem "devise"
+gem "ruby-openai"
 
 group :development, :test do
   gem "dotenv-rails"
