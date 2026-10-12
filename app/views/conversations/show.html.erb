@@ -15,11 +15,7 @@
 
         <div class = "row">
           <div class = "card-chaplin">
-            <p>🍿: Bonjour! Voici mes recommendations d'auprès tes critères pour ta séance d'aujourd'hui. </p>
-          </div>
-
-          <div class = "card-chaplin">
-            <p>🍿: Si vous ne trouvez pas votre bonheur, discutons davantage pour affiner la recherche...</p>
+            <p>🍿:  Voici mes recommendations d'auprès tes critères pour ta séance d'aujourd'hui. Si vous ne trouvez pas votre bonheur, discutons davantage pour affiner la recherche...</p>
           </div>
 
           <% @conversation.messages.each do |message|  %>
@@ -56,7 +52,7 @@
     <%# RIGHT SIDE for the recommendations %>
     <div id = "recommendation" class ="col-md-6">
       <div class="text-center my-4">
-        <h5>🍿 Films recommendées 🍿</h5>
+        <h5>🍿 Films recommendées par <strong>Chaplin</strong> 🍿</h5>
       </div>
 
       <div class="cards">
