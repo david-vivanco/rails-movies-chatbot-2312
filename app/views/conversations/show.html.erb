@@ -1,2 +1,85 @@
-<h1>Conversations#show</h1>
-<p>Find me in app/views/conversations/show.html.erb</p>
+<div class="container my-5">
+  <%# TITLE %>
+  <div class="text-center mb-4">
+    <div class="display-4 mb-2">🍿</div>
+    <h1>Assistant Cinéma</h1>
+  </div>
+
+  <div class="row">
+    <%# LEFT SIDE for the chatbot %>
+    <div id = "chat" class ="col-md-8 chat-container">
+      <%# The exchanges "index" %>
+      <div id="exchanges">
+        <div class="my-4">
+          <h5>🍿 Bonjour, je suis <strong>Chaplin</strong>, ton assistant cinéma</h5>
+        </div>
+
+        <div class = "row">
+          <div class = "card-chaplin">
+            <p>Bonjour! Voici mes recommendations d'auprès tes critères pour ta séance d'aujourd'hui. </p>
+          </div>
+
+          <div class = "card-chaplin">
+            <p>Si vous ne trouvez pas votre bonheur, discutons davantage pour affiner la recherche...</p>
+          </div>
+
+          <div class="card-user">
+            <p>I will add here what the user writes</p>
+          </div>
+
+          <div class = "card-chaplin">
+            <p>Bla, bla...</p>
+          </div>
+        </div>
+
+      </div>
+
+      <%# The form where the user writes its messages %>
+      <div id = "new_message" class = "mt-3 border-top border-black border-3">
+        <div id="chat_form" class="card-input mt-3 p-2" style="background:#f9f9f9; border-radius:10px;">
+          <%= simple_form_for(@message, url: criteria_conversation_messages_path(@criteria, @conversation)) do |f| %>
+            <div class="d-flex align-items-center">
+              <%= f.text_field :content, class: 'form-control rounded-pill' , placeholder: 'Type your message...' %>
+              <button type="submit" class="btn btn-flat ms-2" style="border-radius: 50%; width: 40px; height: 40px;">
+                <i class="fa fa-paper-plane" aria-hidden="true"></i>
+              </button>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+    </div>
+
+    <%# RIGHT SIDE for the recommendations %>
+    <div id = "recommendation" class ="col-md-4">
+      <div class="text-center my-4">
+        <h5>🍿 Films recommendées 🍿</h5>
+      </div>
+
+      <div class="cards">
+        <% @movies.each do |movie| %>
+          <div class="card-movie">
+            <img src="<%= movie[:poster_url] %>" />
+            <div class="card-movie-infos">
+              <div>
+                <h2><%= movie[:title] %>
+                  <span class="fw-light"> <%= movie[:rating] %> </span>
+                  <i class="fa-solid fa-star text-info fs-7"></i>
+                </h2>
+                <p><%= movie[:overview] %></p>
+              </div>
+            </div>
+            <div class = "card-select m-1 text-center">
+              <h2>SELECT</h2>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div id = "instructions" class = "text-center my-4">
+          <p>Si vous trouvez votre bonheur, <strong>selectionner</strong> le film pour mettre fin à la conversation. Sinon, continuez à parler avec <strong>Chaplin</strong>.</p>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,18 @@
+      <div class="cards">
+        <% @movies.each do |movie| %>
+          <div class="card-movie">
+            <img src="<%= movie.poster_url %>" />
+            <div class="card-movie-infos">
+              <div>
+                <h2><%= movie.title %>
+                  <span class="fw-light"> <%= movie.rating %> </span>
+                  <i class="fa-solid fa-star text-info fs-7"></i>
+                </h2>
+                <p><%= movie.overview %></p>
+              </div>
+            </div>
+            <div class = "card-select m-3">
+              <h2>SELECT</h2>
+          </div>
+        </div>
+      </div>
