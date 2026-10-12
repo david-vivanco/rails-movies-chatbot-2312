@@ -1,0 +1,103 @@
+// To use bootstrap in SCSS
+@import "bootstrap";
+
+// THE CHAT CONTAINER
+
+
+#chat {
+  display: flex;
+  flex-direction: column;
+  height: 100%; // or a specific height like 500px
+}
+
+#exchanges {
+   flex: 1; // allows it to grow
+  overflow-y: auto; // enables vertical scrolling when content overflows
+  padding: 1em; // optional, for aesthetic
+}
+
+#new_message {
+  /* keep default or set fixed height if needed */
+  //padding: 1em;
+  //background-color: #f1f1f1; // optional style
+}
+
+
+
+
+// EACH MESSAGE FORMATTING
+
+.card-chaplin {
+  // using bootstrap
+  @extend .col-md-10; // bootstrap for: @media (min-width: 768px) { width: 83.3333%;}
+  @extend .border; // border: 1px solid #dee2e6;
+  @extend .rounded-5; // border-radius: 3rem;
+  @extend .bg-white; // background-color: #fff;
+  @extend .my-1;
+
+  color: black;
+
+  // Vertical alignement of the text within its
+  // Option 1:
+  // text_align: center;
+
+  // Option 2:
+  // display: flex;
+  // align-items: center; // centers vertically
+
+  // Options 3:
+  // display: table;
+  // vertical-align: middle;
+
+  //Option 4:
+  p {
+    @extend .pt-3;  // manually adjusting the text to be centered vertically
+  }
+}
+
+
+.card-user {
+  @extend .col-md-10; // bootstrap for: @media (min-width: 768px) { width: 83.3333%;}
+  @extend .border; // border: 1px solid #dee2e6;
+  @extend .rounded-5; // border-radius: 3rem;
+  @extend .bg-light; // background-color: #fff;
+  @extend .my-1;
+
+  @extend .justify-content-end;
+  text-align:right;
+  margin-left:auto;
+
+  p {
+    @extend .pt-3;  // manually adjusting the text to be centered vertically
+  }
+
+}
+
+// NEW MESSAGE
+.card-input {
+
+
+}
+
+.search-form-control {
+  position: relative;
+}
+
+.search-form-control .btn {
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  right: 8px;
+}
+
+.search-form-control .form-control {
+  height: 3.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  border: 1px solid #E7E7E7;
+}
+
+.search-form-control .form-control:focus {
+  border: 1px solid #1EDD88;
+  outline: none !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}

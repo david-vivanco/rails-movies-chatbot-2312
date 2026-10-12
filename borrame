@@ -1,0 +1,91 @@
+  
+  FORM
+
+  NICE, using SIMPLE <FORM>
+    <div class="d-flex align-items-center p-2" style="background: #f1f1f1; border-radius: 20px;">
+  <%= simple_form_for([@criteria, @conversation, @message], html: { class: 'd-flex align-items-center w-100' }) do |f| %>
+    <%= f.text_field :content, input_html: { class: 'form-control rounded-pill flex-grow-1', placeholder: 'Type your message...' } %>
+    <%= f.button :submit, class: 'btn btn-primary rounded-pill ms-2' do %>
+      <i class="fa fa-paper-plane" aria-hidden="true"></i>
+    <% end %>
+  <% end %>
+</div>
+  </FORM>
+
+
+
+  THIS IS NICE, but not using SIMPLE FORM
+  <div id = "chat_form" class="card-input border-top border-black border-3 mt-3">
+    <%= simple_form_for(@conversation, @message) do |f| %>
+      <div class="search-form-control form-group">
+        <input class="form-control string required" type="text" name="message" id="content" />
+        <button name="button" type="submit" class="btn btn-flat">
+          <i class="fa fa-paper-plane" aria-hidden="true"></i> Send
+        </button>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+SIMPLE FORM, not nice looking
+
+    <%# The form where the user writes its messages %>
+    <div id = "chat_form" class="card-input border-top border-black border-3 mt-3">
+      <%= simple_form_for(@message, url: criteria_conversation_messages_path(@criteria, @conversation)) do |f| %>
+        <div class="search-form-control form-group">
+          <%= f.text_field :content %>
+          <button name="button" type="submit" class="btn btn-flat">
+            <i class="fa fa-paper-plane" aria-hidden="true"></i> Send
+          </button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  
+  
+DISPLAYING FILMS TO THE RIGHT
+  
+  THIS WORKS, using hashes and not DB objects require [:attr] vs. .attr
+  <div class="cards">
+        <% @movies.each do |movie| %>
+          <div class="card-movie">
+            <img src="<%= movie[:poster_url] %>" />
+            <div class="card-movie-infos">
+              <div>
+                <h2><%= movie[:title] %>
+                  <span class="fw-light"> <%= movie[:rating] %> </span>
+                  <i class="fa-solid fa-star text-info fs-7"></i>
+                </h2>
+                <p><%= movie[:overview] %></p>
+              </div>
+            </div>
+            <div class = "card-select m-3">
+              <h2>SELECT</h2>
+          </div>
+        </div>
+      </div>
+
+
+
+
+ORIGINAL
+
+      <div class="cards">
+        <% @movies.each do |movie| %>
+          <div class="card-movie">
+            <img src="<%= movie.poster_url %>" />
+            <div class="card-movie-infos">
+              <div>
+                <h2><%= movie.title %>
+                  <span class="fw-light"> <%= movie.rating %> </span>
+                  <i class="fa-solid fa-star text-info fs-7"></i>
+                </h2>
+                <p><%= movie.overview %></p>
+              </div>
+            </div>
+            <div class = "card-select m-3">
+              <h2>SELECT</h2>
+          </div>
+        </div>
+      </div>
+
