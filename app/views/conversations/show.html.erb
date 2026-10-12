@@ -1,13 +1,12 @@
 <div class="container my-5">
   <%# TITLE %>
   <div class="text-center mb-4">
-    <div class="display-4 mb-2">🍿</div>
-    <h1>Assistant Cinéma</h1>
+    <h1>🍿 Assistant Cinéma 🍿</h1>
   </div>
 
   <div class="row">
     <%# LEFT SIDE for the chatbot %>
-    <div id = "chat" class ="col-md-8 chat-container">
+    <div id = "chat" class ="col-md-6 chat-container">
       <%# The exchanges "index" %>
       <div id="exchanges">
         <div class="my-4">
@@ -16,20 +15,24 @@
 
         <div class = "row">
           <div class = "card-chaplin">
-            <p>Bonjour! Voici mes recommendations d'auprès tes critères pour ta séance d'aujourd'hui. </p>
+            <p>🍿: Bonjour! Voici mes recommendations d'auprès tes critères pour ta séance d'aujourd'hui. </p>
           </div>
 
           <div class = "card-chaplin">
-            <p>Si vous ne trouvez pas votre bonheur, discutons davantage pour affiner la recherche...</p>
+            <p>🍿: Si vous ne trouvez pas votre bonheur, discutons davantage pour affiner la recherche...</p>
           </div>
 
-          <div class="card-user">
-            <p>I will add here what the user writes</p>
-          </div>
-
-          <div class = "card-chaplin">
-            <p>Bla, bla...</p>
-          </div>
+          <% @conversation.messages.each do |message|  %>
+            <% if message.sender == "user" %>
+              <div class="card-user">
+                <p><strong> YOU : </strong><%= message.content %></p>
+              </div>
+            <% elsif message.sender == "AI" %>
+              <div class = "card-chaplin">
+                <p>🍿: <%= message.content %> </p>
+              </div>
+            <% end %>
+          <% end %>
         </div>
 
       </div>
@@ -51,7 +54,7 @@
     </div>
 
     <%# RIGHT SIDE for the recommendations %>
-    <div id = "recommendation" class ="col-md-4">
+    <div id = "recommendation" class ="col-md-6">
       <div class="text-center my-4">
         <h5>🍿 Films recommendées 🍿</h5>
       </div>

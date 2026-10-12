@@ -31,7 +31,14 @@ class ConversationsController < ApplicationController
       rating: 8.1
     }
 
-    @movies = [movie1, movie2, movie3]
+    movie4 = {
+      title: "Citizen Kane",
+      poster_url: "https://image.tmdb.org/t/p/w500/ruF3Lmd4A8MHbnEBE6lxPMbsHGL.jpg",
+      overview: "Newspaper magnate Charles Foster Kane is taken from his mother as a boy and made the ward of a rich industrialist. As a result, every well-meaning, tyrannical or self-destructive move he makes for the rest of his life appears in some way to be a reaction to that deeply wounding event.",
+      rating: 8.0
+    }
+
+    @movies = [movie1, movie2, movie3, movie4]
   end
 
   def destroy

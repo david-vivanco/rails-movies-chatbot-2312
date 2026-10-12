@@ -1,6 +1,6 @@
 .cards {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-gap: 16px;
   }
 // see below options for smaller screens
@@ -9,6 +9,10 @@
     overflow: hidden;
     background: white;
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    // to have the "select part" at the bottom, not just after the overview"
+    display: flex;
+    flex-direction: column;
+    height: 100%;
   }
 
   .card-movie > img {
@@ -50,6 +54,8 @@
     align-items: center;
     background-color: red;
     color: whitesmoke;
+    // to have the "select part" at the bottom, not just after the overview"
+    margin-top: auto;
    }
 
 
