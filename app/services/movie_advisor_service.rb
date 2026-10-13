@@ -27,9 +27,9 @@ class MovieAdvisorService
     return if content.blank?
 
     # 3. Persistance en base de données : on crée le nouveau message associé à la conversation.
-    # sender: "assistant" permet d'identifier visuellement qui parle dans l'interface de chat.
+    # sender: "AI" permet à la vue conversations/show d'identifier et d'afficher le message de Chaplin.
     @conversation.messages.create!(
-      sender: "assistant",
+      sender: "AI",
       content: content
     )
   end
@@ -47,7 +47,7 @@ class MovieAdvisorService
 
     # Prompt système : instructions données à l'IA sur son rôle et son format de réponse.
     system_prompt = <<~PROMPT
-      Tu es Movie Match, un assistant expert en cinéma chaleureux et passionné.
+      Tu es Chaplin, un assistant cinéma chaleureux et passionné.
       Ton rôle est de recommander les films idéaux selon les préférences de l'utilisateur.
 
       Critères initiaux de l'utilisateur :
@@ -67,8 +67,8 @@ class MovieAdvisorService
     # On ajoute l'historique des échanges dans l'ordre chronologique
     # pour que l'IA se souvienne de la discussion en cours.
     @conversation.messages.order(:created_at).each do |msg|
-      # OpenAI attend le rôle "assistant" ou "user"
-      role = msg.sender == "assistant" ? "assistant" : "user"
+      # OpenAI attend le rôle "assistant" pour l'IA ou "user" pour l'utilisateur
+      role = ["AI", "assistant"].include?(msg.sender) ? "assistant" : "user"
       messages << { role: role, content: msg.content }
     end
 
