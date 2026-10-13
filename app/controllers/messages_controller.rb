@@ -3,27 +3,17 @@ class MessagesController < ApplicationController
   end
 
   def create
-    # params = "message"=>{"content"=>"Hello!"}, "controller"=>"messages", "action"=>"create", "criteria_id"=>"1", "conversation_id"=>"1"} permitted: false>
-
     @conversation = Conversation.find(params[:conversation_id])
-    # @criteria = Criteria.find(params[:criteria_id])
-
-    @message = Message.new(message_params)
-
+    @message = @conversation.messages.new(message_params)
     @message.sender = "user"
-    @message.conversation = @conversation
-    # @message.criteria = @criteria
 
     if @message.save
-      redirect_to conversation_path(@conversation)
+      # Appel de notre service IA : il génère la recommandation et crée le message assistant en DB
+      MovieAdvisorService.new(@conversation).call
 
-      @messageAI = Message.new
-      @messageAI.sender = "AI"
-      @messageAI.content = "here is Chaplin's response"
-      @messageAI.conversation = @conversation
-      @messageAI.save
+      redirect_to conversation_path(@conversation)
     else
-      render :show, status: :unprocessable_entity # There is not "new" here, so we use show
+      render "conversations/show", status: :unprocessable_entity
     end
   end
 
