@@ -4,36 +4,32 @@
 
 <%# container des conversations %>
 <div class="container mt-3 mb-4">
+  <% if @conversations.any?  %>
+    <% @conversations.each do |conversation| %>
+    <div class="conversation-card">
+      <p class="fs-2">🍿</p>
+        <div class="conversation-card-content">
+          <p><small><%= conversation.started_on %></small></p>
+          <p><%= truncate(conversation.summary, length: 80) %></p>
+      </div>
 
-  <div class="conversation-card">
-    <img src='https://kitt.lewagon.com/placeholder/users/Eschults' class="avatar-large"/>
-    <div class="conversation-card-content">
-      <p><small>9th January</small></p>
-      <p>Lorem ipsum dolor sit amet, <strong>consectetur</strong> adipisicing elit.</p>
+      <div class="conversation-card-actions">
+          <%= link_to conversation_path(conversation), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Supprimer cette recherche ?" } do %>
+            Delete <i class="far fa-trash-alt"></i>
+          <% end %>
+      </div>
     </div>
-
-    <div class="conversation-card-actions">
-      <a href="#">Delete <i class="far fa-trash-alt"></i></a>
-    </div>
-  </div>
-
-  <div class="conversation-card">
-    <img src='https://kitt.lewagon.com/placeholder/users/Eschults' class="avatar-large"/>
-    <div class="conversation-card-content">
-      <p><small>18th March</small></p>
-      <p>Lorem ipsum dolor sit amet, <strong>consectetur</strong> adipisicing elit.</p>
-    </div>
-
-    <div class="conversation-card-actions">
-      <a href="#">Delete <i class="far fa-trash-alt"></i></a>
-    </div>
-  </div>
-
-
+  <% end %>
+  <% else %>
+    <p>Aucune recherche pour l'instant 🍿</p>
+  <% end %>
 </div>
 
   <div class="d-flex flex-column gap-3 mb-5">
     <!-- Bouton pour démarrer une nouvelle recherche -->
     <!-- Remplace '#' par ton path Rails une fois la route prête, ex: new_criteria_path -->
-    <%= link_to "Nouvelle recherche", "#", class: "btn btn-info text-white btn-lg shadow-sm w-100 rounded-pill py-2" %>
+    <%= link_to "Nouvelle recherche", new_criteria_path, class: "btn btn-info text-white btn-lg shadow-sm w-100 rounded-pill py-2" %>
+    <%= link_to "Retour à l'accueil", root_path, class: "btn btn-secondary text-white btn-sm shadow-sm w-50 py-1 mt-5" %>
   </div>
+
+</div>

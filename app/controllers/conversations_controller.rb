@@ -1,5 +1,6 @@
 class ConversationsController < ApplicationController
   def index
+    @conversations = current_user.conversations.order(created_at: :desc)
   end
 
   def create
@@ -8,7 +9,7 @@ class ConversationsController < ApplicationController
       criteria: @criteria,
       user: current_user,
       title: "Conversation du #{Time.current.strftime('%d/%m/%Y %H:%M')}"
-     )
+    )
     if @conversation.save
       redirect_to conversation_path(@conversation)
     else
@@ -53,7 +54,8 @@ class ConversationsController < ApplicationController
   end
 
   def destroy
+    @conversation = current_user.conversations.find(params[:id])
     @conversation.destroy
-    redirect_to conversations_path
+    redirect_to conversations_path, notice: "Recherche supprimée"
   end
 end
