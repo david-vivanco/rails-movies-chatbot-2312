@@ -18,8 +18,8 @@ class ConversationsController < ApplicationController
   end
 
   def show
-    @criteria = Criteria.find(params[:id])
     @conversation = Conversation.find(params[:id])
+    @criteria = Criteria.find(@conversation.criteria_id)
     @message = Message.new(sender: "user", conversation_id: params[:id])
 
     movie1 = {
