@@ -43,7 +43,11 @@ class MovieAdvisorService
     criteria = @conversation.criteria
 
     # compact_blank retire les chaînes vides, join rassemble le tableau en une phrase lisible.
-    genres_text = criteria&.genres&.compact_blank&.join(", ")
+    audiance = criteria&.audiance&.compact_blank&.join(", ")
+    ambiance = criteria&.ambiance&.compact_blank&.join(", ")
+    duree = criteria&.duree&.compact_blank&.join(", ")
+    popularite = criteria&.popularite&.compact_blank&.join(", ")
+    # genres_text = criteria&.genres&.compact_blank&.join(", ")
 
     # Prompt système : instructions données à l'IA sur son rôle et son format de réponse.
     system_prompt = <<~PROMPT
@@ -51,15 +55,20 @@ class MovieAdvisorService
       Ton rôle est de recommander les films idéaux selon les préférences de l'utilisateur.
 
       Critères initiaux de l'utilisateur :
-      - Genres : #{genres_text.presence || 'Non précisé'}
-      - Mots-clés : #{criteria&.keywords.presence || 'Non précisé'}
-      - Humeur / Envie : #{criteria&.prompt.presence || 'Non précisé'}
+
+      - Audience : #{audiance.presence || 'Non précisé'}
+      - Envies : #{ambiance.presence || 'Non précisé'}
+      - Durée : #{duree.presence || 'Non précisé'}
+      - Popularité : #{popularite.presence || 'Non précisé'}
 
       Consignes :
-      1. Suggère 2 ou 3 films pertinents avec une brève explication accrocheuse (1-2 phrases par film) expliquant pourquoi ce choix correspond exactement à la demande.
+      1. Suggère 3 films pertinents avec une brève explication accrocheuse (1 phrase par film) expliquant pourquoi ce choix correspond exactement à la demande.
       2. Reste concis, engageant, et pose une question ouverte pour relancer l'échange si l'utilisateur souhaite affiner.
       3. Rédige en français avec des emojis cinéma bien dosés.
     PROMPT
+
+    # removed from prompt, as currently not used
+    #  - Genres : #{genres_text.presence || 'Non précisé'}
 
     # On initialise le tableau avec le message de rôle "system"
     messages = [{ role: "system", content: system_prompt }]
