@@ -15,7 +15,7 @@
 
         <div class = "row">
           <div class = "card-chaplin">
-            <p>🍿:  Voici mes recommendations d'auprès tes critères pour ta séance d'aujourd'hui. Si vous ne trouvez pas votre bonheur, discutons davantage pour affiner la recherche...</p>
+            <p>🍿:  Voici mes recommendations d'après tes critères pour ta séance d'aujourd'hui. Si tu ne trouves pas ton bonheur, discutons davantage pour affiner la recherche...</p>
           </div>
 
           <% @conversation.messages.each do |message|  %>
@@ -52,33 +52,35 @@
     <%# RIGHT SIDE for the recommendations %>
     <div id = "recommendation" class ="col-md-6">
       <div class="text-center my-4">
-        <h5>🍿 Films recommendées par <strong>Chaplin</strong> 🍿</h5>
+        <h5>🍿 Films recommendés par <strong>Chaplin</strong> 🍿</h5>
       </div>
 
-      <div class="cards">
-        <% @movies.each do |movie| %>
-          <div class="card-movie">
-            <img src="<%= movie[:poster_url] %>" />
-            <div class="card-movie-infos">
-              <div>
-                <h2><%= movie[:title] %>
-                  <span class="fw-light"> <%= movie[:rating] %> </span>
-                  <i class="fa-solid fa-star text-info fs-7"></i>
-                </h2>
-                <p><%= movie[:overview] %></p>
-              </div>
-            </div>
-            <div class = "card-select m-1 text-center">
-              <h2>SELECT</h2>
-            </div>
+    <div class="cards">
+
+      <% @movies.each do |movie| %>
+      <div class="card-movie">
+        <div class="card-select m-1 text-center">
+          <h2>SELECT</h2>
+        </div>
+          <%= image_tag movie[:poster_url], alt: movie[:title] %>
+        <div class="card-movie-infos">
+          <div>
+            <h2>
+              <%= movie[:title] %>
+            <span class="fw-light"><%= movie[:rating] %></span>
+            <i class="fa-solid fa-star text-info fs-7"></i>
+            </h2>
+            <p><%= movie[:overview] %></p>
           </div>
-        <% end %>
+        </div>
       </div>
+      <% end %>
 
       <div id = "instructions" class = "text-center my-4">
-          <p>Si vous trouvez votre bonheur, <strong>selectionner</strong> le film pour mettre fin à la conversation. Sinon, continuez à parler avec <strong>Chaplin</strong>.</p>
+        <p>Si tu trouves ton bonheur, <strong>sélectionne</strong> le film pour mettre fin à la conversation. Sinon, continue à parler avec <strong>Chaplin</strong>.</p>
       </div>
     </div>
 
+    </div>
   </div>
 </div>

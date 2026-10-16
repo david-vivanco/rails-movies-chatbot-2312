@@ -26,12 +26,16 @@ class MovieAdvisorService
     # Sécurité : si la réponse est vide pour une raison quelconque, on s'arrête ici.
     return if content.blank?
 
+    cards = JSON.parse(content)
+
     # 3. Persistance en base de données : on crée le nouveau message associé à la conversation.
     # sender: "AI" permet à la vue conversations/show d'identifier et d'afficher le message de Chaplin.
-    @conversation.messages.create!(
+      @conversation.messages.create!(
       sender: "AI",
-      content: content
-    )
+      content: cards["user_response"]
+      )
+
+    cards
   end
 
   private
@@ -55,22 +59,50 @@ class MovieAdvisorService
       Ton rôle est de recommander les films idéaux selon les préférences de l'utilisateur.
 
       Critères initiaux de l'utilisateur :
-
       - Audience : #{audiance.presence || 'Non précisé'}
-      - Envies : #{ambiance.presence || 'Non précisé'}
-      - Durée : #{duree.presence || 'Non précisé'}
-      - Popularité : #{popularite.presence || 'Non précisé'}
+      - Ambiance : #{ambiance.presence || 'Non précisé'}
+      - Duree : #{duree.presence || 'Non précisé'}
+      - Popularite : #{popularite.presence || 'Non précisé'}
 
       Consignes :
-      1. Suggère 3 films pertinents avec une brève explication accrocheuse (1 phrase par film) expliquant pourquoi ce choix correspond exactement à la demande.
+      1. Suggère 4 films pertinents avec une brève explication accrocheuse (1-2 phrases par film) expliquant pourquoi ce choix correspond exactement à la demande.
       2. Reste concis, engageant, et pose une question ouverte pour relancer l'échange si l'utilisateur souhaite affiner.
       3. Rédige en français avec des emojis cinéma bien dosés.
-    PROMPT
 
-    # removed from prompt, as currently not used
-    #  - Genres : #{genres_text.presence || 'Non précisé'}
+    Réponds uniquement avec un JSON valide
 
-    # On initialise le tableau avec le message de rôle "system"
+    Le champ "user_response" doit contenir un texte naturel destiné à l'utilisateur.
+
+    Le champ "movies" doit contenir exactement 4 films.
+
+    Format attendu :
+
+    {
+        "user_response": "texte à afficher dans la conversation",
+        "movies": [
+          {
+            "title": "Film 1",
+            "year": 2010
+          },
+          {
+            "title": "Film 2",
+            "year": 2014
+          },
+          {
+            "title": "Film 3",
+            "year": 2016
+          },
+          {
+            "title": "Film 4",
+            "year": 2017
+          }
+        ]
+      }
+
+  Ne renvoie aucun texte avant ou après ce JSON.
+  PROMPT
+
+  # On initialise le tableau avec le message de rôle "system"
     messages = [{ role: "system", content: system_prompt }]
 
     # On ajoute l'historique des échanges dans l'ordre chronologique
