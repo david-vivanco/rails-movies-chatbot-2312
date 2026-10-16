@@ -13,14 +13,14 @@ class MovieAdvisorService
     # 1. Envoi de la requête à l'API OpenAI avec le modèle de chat
     response = @client.chat(
       parameters: {
-        model: "gpt-4o-mini",     # Modèle léger, rapide et économique
-        messages: build_messages, # Tableau contenant le prompt système et l'historique
-        temperature: 0.7          # Créativité de la réponse (entre 0.0 et 1.0)
+        model: "gpt-4o-mini",                     # Modèle léger, rapide et économique
+        messages: build_messages,                 # Tableau contenant le prompt système et l'historique
+        temperature: 0.7,                         # Créativité de la réponse (entre 0.0 et 1.0)
+        response_format: { type: "json_object" }  # Force OpenAI à garantir un JSON valide
       }
     )
 
     # 2. Extraction du texte de la réponse depuis la structure JSON retournée par OpenAI
-    # dig permet de naviguer de manière sécurisée dans les clés sans risquer d'erreur si une clé manque.
     content = response.dig("choices", 0, "message", "content")
 
     # Sécurité : si la réponse est vide pour une raison quelconque, on s'arrête ici.
@@ -30,54 +30,57 @@ class MovieAdvisorService
 
     # 3. Persistance en base de données : on crée le nouveau message associé à la conversation.
     # sender: "AI" permet à la vue conversations/show d'identifier et d'afficher le message de Chaplin.
-      @conversation.messages.create!(
+    @conversation.messages.create!(
       sender: "AI",
       content: cards["user_response"]
-      )
+    )
 
+    # Retourne le hash complet { "user_response" => "...", "movies" => [...] }
     cards
   end
 
   private
 
   # Méthode privée chargée de construire le contexte envoyé à l'IA.
-  # Elle assemble la consigne de départ (system prompt) et tous les messages échangés.
+  # Elle assemble la consigne de départ (system prompt), le profil et tous les messages échangés.
   def build_messages
     # Récupération des critères initiaux choisis par l'utilisateur
     criteria = @conversation.criteria
 
-    # compact_blank retire les chaînes vides, join rassemble le tableau en une phrase lisible.
+    # compact_blank retire les chaînes vides, join rassemble le tableau en une chaîne lisible.
     audiance = criteria&.audiance&.compact_blank&.join(", ")
     ambiance = criteria&.ambiance&.compact_blank&.join(", ")
     duree = criteria&.duree&.compact_blank&.join(", ")
     popularite = criteria&.popularite&.compact_blank&.join(", ")
-    # genres_text = criteria&.genres&.compact_blank&.join(", ")
 
-    # Prompt système : instructions données à l'IA sur son rôle et son format de réponse.
+    # Récupération de la synthèse du profil utilisateur (ex: "Jean is a Casual Relaxer... Loves comedy...")
+    user_profile_context = @conversation.user&.user_prompt
+
+    # Prompt système : instructions données à l'IA sur son rôle, son profil et son format de réponse JSON.
     system_prompt = <<~PROMPT
       Tu es Chaplin, un assistant cinéma chaleureux et passionné.
       Ton rôle est de recommander les films idéaux selon les préférences de l'utilisateur.
 
-      Critères initiaux de l'utilisateur :
+      #{"Profil permanent de l'utilisateur :\n- #{user_profile_context}\n" if user_profile_context.present?}
+      Critères de la recherche actuelle :
       - Audience : #{audiance.presence || 'Non précisé'}
       - Ambiance : #{ambiance.presence || 'Non précisé'}
       - Duree : #{duree.presence || 'Non précisé'}
       - Popularite : #{popularite.presence || 'Non précisé'}
 
       Consignes :
-      1. Suggère 4 films pertinents avec une brève explication accrocheuse (1-2 phrases par film) expliquant pourquoi ce choix correspond exactement à la demande.
-      2. Reste concis, engageant, et pose une question ouverte pour relancer l'échange si l'utilisateur souhaite affiner.
-      3. Rédige en français avec des emojis cinéma bien dosés.
+      1. Prends impérativement en compte son profil de cinéphile (ses goûts généraux et les genres qu'il déteste/évite) pour calibrer tes choix avec ses critères actuels.
+      2. Suggère 4 films pertinents avec une brève explication accrocheuse (1-2 phrases par film) expliquant pourquoi ce choix correspond exactement à la demande.
+      3. Reste concis, engageant, et pose une question ouverte pour relancer l'échange si l'utilisateur souhaite affiner.
+      4. Rédige en français avec des emojis cinéma bien dosés.
 
-    Réponds uniquement avec un JSON valide
+      Réponds uniquement avec un JSON valide.
 
-    Le champ "user_response" doit contenir un texte naturel destiné à l'utilisateur.
+      Le champ "user_response" doit contenir un texte naturel destiné à l'utilisateur.
+      Le champ "movies" doit contenir exactement 4 films.
 
-    Le champ "movies" doit contenir exactement 4 films.
-
-    Format attendu :
-
-    {
+      Format attendu :
+      {
         "user_response": "texte à afficher dans la conversation",
         "movies": [
           {
@@ -99,16 +102,15 @@ class MovieAdvisorService
         ]
       }
 
-  Ne renvoie aucun texte avant ou après ce JSON.
-  PROMPT
+      Ne renvoie aucun texte avant ou après ce JSON.
+    PROMPT
 
-  # On initialise le tableau avec le message de rôle "system"
+    # On initialise le tableau avec le message de rôle "system"
     messages = [{ role: "system", content: system_prompt }]
 
     # On ajoute l'historique des échanges dans l'ordre chronologique
     # pour que l'IA se souvienne de la discussion en cours.
     @conversation.messages.order(:created_at).each do |msg|
-      # OpenAI attend le rôle "assistant" pour l'IA ou "user" pour l'utilisateur
       role = ["AI", "assistant"].include?(msg.sender) ? "assistant" : "user"
       messages << { role: role, content: msg.content }
     end
