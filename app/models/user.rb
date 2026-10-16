@@ -4,42 +4,39 @@ class User < ApplicationRecord
 
   has_many :conversations, dependent: :destroy
 
-  # Liste des 5 profils avec leurs descriptions de référence
+  # 5 profils traduits en français
   CINEMA_PROFILES = {
-    "The Casual Relaxer" => "watches to unwind after work and wants something easy, familiar and not too long. Values a quick decision over a perfect pick, and often rewatches favorites.",
-    "The Blockbuster Fan" => "follows big releases, franchises and spectacle. Wants what everyone is talking about and likes action, sci-fi and superhero films.",
-    "The Cinephile" => "knows directors, watches classics, auteur and foreign films, and doesn't mind subtitles, slow pacing or black and white. Hardest to satisfy because already seen the obvious picks.",
-    "The Explorer" => "curious and eager for hidden gems, festival films and anything off the beaten track.",
-    "The Genre Specialist" => "loyal to specific genres and needs recommendations that are less obvious within them."
+    "Le spectateur détente" => "Regarde des films pour décompresser après le travail, recherche des choses simples, familières et pas trop longues. Privilégie un choix rapide plutôt qu'un choix parfait et revoit souvent ses favoris.",
+    "L'amateur de blockbusters" => "Suit les grandes sorties, franchises et spectacles visuels. Veut voir ce dont tout le monde parle et aime l'action, la science-fiction et les super-héros.",
+    "Le cinéphile exigeant" => "Connaît les réalisateurs, regarde des classiques, du cinéma d'auteur et étranger. N'a pas peur des sous-titres, du noir et blanc ou d'un rythme lent.",
+    "L'explorateur curieux" => "Pas forcément expert mais curieux. Cherche des pépites méconnues, des films de festival et sort des sentiers battus.",
+    "Le spécialiste de genre" => "Fidèle à un genre spécifique (horreur, comédie romantique, thriller, animation) et recherche des pépites moins évidentes au sein de ce genre."
   }.freeze
 
-  # Liste standard des genres de films
   GENRES = [
     "Action", "Animation", "Aventure", "Comédie", "Drame",
     "Documentaire", "Expérimental", "Fantastique", "Horreur",
     "Manga / Anime", "Policier", "Romance", "Science-Fiction", "Thriller"
   ].freeze
 
-  # Avatars disponibles (émojis cinéma simples)
   AVATARS = ["🍿", "🎬", "📽️", "🎞️", "🕶️", "🎥"].freeze
 
   before_save :generate_user_prompt
 
   private
 
-  # Construction automatique de la synthèse profil pour Chaplin
   def generate_user_prompt
     user_name = name.presence || "L'utilisateur"
     profile_desc = CINEMA_PROFILES[cinema_profile]
 
     prompt_parts = []
-    prompt_parts << "#{user_name} is #{cinema_profile} (#{profile_desc})." if cinema_profile.present?
+    prompt_parts << "#{user_name} a le profil suivant : #{cinema_profile} (#{profile_desc})." if cinema_profile.present?
 
     favs = favorite_genres&.compact_blank
-    prompt_parts << "He/She loves #{favs.join(', ')}." if favs.present?
+    prompt_parts << "Adore : #{favs.join(', ')}." if favs.present?
 
     dislikes = disliked_genres&.compact_blank
-    prompt_parts << "He/She dislikes/hates #{dislikes.join(', ')}." if dislikes.present?
+    prompt_parts << "Déteste ou souhaite éviter : #{dislikes.join(', ')}." if dislikes.present?
 
     self.user_prompt = prompt_parts.join(" ")
   end
