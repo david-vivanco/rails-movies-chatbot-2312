@@ -23,24 +23,25 @@ class ConversationsController < ApplicationController
     @message = Message.new(sender: "user", conversation_id: params[:id])
     cards = MovieAdvisorService.new(@conversation).call
 
+    @movies = cards["movies"].map do |movie|
+      tmdb_movie = TmdbSearchService.new(
+        movie["title"],
+        movie["year"]
+      ).call
 
-   @movies = cards["movies"].map do |movie|
-    tmdb_movie = TmdbSearchService.new(
-    movie["title"],
-    movie["year"]
-  ).call
+      @conversation.title = movie["title"]
 
-  next unless tmdb_movie
+      next unless tmdb_movie
 
-  {
-    title: tmdb_movie["title"],
-    poster_url: "https://image.tmdb.org/t/p/w500#{tmdb_movie['poster_path']}",
-    overview: tmdb_movie["overview"],
-    rating: tmdb_movie["vote_average"]
-  }
-  end.compact
+      {
+        title: tmdb_movie["title"],
+        poster_url: "https://image.tmdb.org/t/p/w500#{tmdb_movie['backdrop_path']}",
+        overview: tmdb_movie["overview"],
+        rating: tmdb_movie["vote_average"].round(1)
+      }
+    end.compact
 
-    #@movies = [movie1, movie2, movie3, movie4]
+    # @movies = [movie1, movie2, movie3, movie4]
   end
 
   def destroy
