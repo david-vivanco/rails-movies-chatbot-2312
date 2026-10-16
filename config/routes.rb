@@ -20,4 +20,5 @@ Rails.application.routes.draw do
     end
   end
   resources :conversations, only: [:index, :show, :destroy]
+  resource :profile, only: [:show, :edit, :update]
 end
