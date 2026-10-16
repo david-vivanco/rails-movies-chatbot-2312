@@ -51,6 +51,7 @@ class MovieAdvisorService
     ambiance = criteria&.ambiance&.compact_blank&.join(", ")
     duree = criteria&.duree&.compact_blank&.join(", ")
     popularite = criteria&.popularite&.compact_blank&.join(", ")
+    # genres_text = criteria&.genres&.compact_blank&.join(", ")
 
     # Prompt système : instructions données à l'IA sur son rôle et son format de réponse.
     system_prompt = <<~PROMPT
