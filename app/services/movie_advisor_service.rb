@@ -76,7 +76,7 @@ class MovieAdvisorService
 
       Réponds uniquement avec un JSON valide.
 
-      Le champ "user_response" doit contenir un texte naturel destiné à l'utilisateur.
+      Le champ "user_response" doit contenir un texte naturel destiné à l'utilisateur, qui reprend les titres des 4 films proposés sans guimet.
       Le champ "movies" doit contenir exactement 4 films.
 
       Format attendu :
