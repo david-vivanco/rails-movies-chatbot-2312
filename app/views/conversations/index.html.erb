@@ -10,9 +10,9 @@
       <p class="fs-2">🍿</p>
         <div class="conversation-card-content">
           <p><small><%= conversation.started_on %></small></p>
-          <p><%= truncate(conversation.summary, length: 80) %></p>
+          <p><%= truncate(conversation.title, length: 80) %></p>
       </div>
-
+      <%# where is conversation.summary created? %>
       <div class="conversation-card-actions">
           <%= link_to conversation_path(conversation), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Supprimer cette recherche ?" } do %>
             Delete <i class="far fa-trash-alt"></i>
