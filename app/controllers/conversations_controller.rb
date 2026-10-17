@@ -29,7 +29,11 @@ class ConversationsController < ApplicationController
         movie["year"]
       ).call
 
-      @conversation.title = movie["title"]
+      # We temporarily rename the conversation with last proposed film (until user selects one)
+      # @conversation.title = "Dernière recommendation: #{movie["title"]}"
+      # @conversation.save
+      string = "Dernière recommendation : #{movie['title']}"
+      @conversation.update(title: "Dernière recommendation: #{movie['title']}")
 
       next unless tmdb_movie
 
@@ -40,8 +44,6 @@ class ConversationsController < ApplicationController
         rating: tmdb_movie["vote_average"].round(1)
       }
     end.compact
-
-    # @movies = [movie1, movie2, movie3, movie4]
   end
 
   def destroy
