@@ -8,7 +8,8 @@ class ConversationsController < ApplicationController
     @conversation = Conversation.new(
       criteria: @criteria,
       user: current_user,
-      title: "Conversation du #{Time.current.strftime('%d/%m/%Y %H:%M')}"
+      # title: "Conversation du #{Time.current.strftime('%d/%m/%Y %H:%M')}"
+      title: "Pas de film selectionné"
     )
     if @conversation.save
       redirect_to conversation_path(@conversation)
@@ -29,6 +30,7 @@ class ConversationsController < ApplicationController
         movie["year"]
       ).call
 
+      Rails.logger.debug "Recherche TMDB : #{movie['title']} => #{tmdb_movie.present?}"
       # We temporarily rename the conversation with last proposed film (until user selects one)
       # @conversation.title = "Dernière recommendation: #{movie["title"]}"
       # @conversation.save

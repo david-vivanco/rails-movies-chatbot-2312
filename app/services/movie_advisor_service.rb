@@ -71,6 +71,12 @@ class MovieAdvisorService
       Consignes :
       1. Prends impérativement en compte son profil de cinéphile (ses goûts généraux et les genres qu'il déteste/évite) pour calibrer tes choix avec ses critères actuels.
       2. Suggère 4 films pertinents avec une brève explication accrocheuse (1-2 phrases par film) expliquant pourquoi ce choix correspond exactement à la demande.
+          Pour chaque film :
+          - utilise le titre officiel du film ;
+          - utilise l'année de sortie officielle ;
+          - n'invente jamais ni ne traduis le titre ;
+          - privilégie le titre utilisé dans The Movie Database (TMDB) ;
+          - si tu as un doute sur le titre exact, ne propose pas le film.
       3. Reste concis, engageant, et pose une question ouverte pour relancer l'échange si l'utilisateur souhaite affiner.
       4. Rédige en français avec des emojis cinéma bien dosés.
 
