@@ -4,10 +4,13 @@
 
 .card-select {
   cursor: pointer;
+  transition: 0.2s ease;
 
   &:hover {
-    background-color: #0dcaf0;
+    background-color: #FFC65A;
     color: white;
-    transition: 0.2s ease;
+    transform: scale(1.03);
   }
 }
+
+

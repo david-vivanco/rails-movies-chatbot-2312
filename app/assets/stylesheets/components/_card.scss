@@ -48,15 +48,22 @@
     position: relative;
   }
 
-  .card-select {
-    // display: flex;
-    // justify-content: space-between;
-    align-items: center;
-    background-color: red;
-    color: whitesmoke;
-    // to have the "select part" at the bottom, not just after the overview"
-    margin-top: auto;
-   }
+.card-select {
+  align-items: center;
+  background-color: #E67E22;
+  color: whitesmoke;
+  cursor: pointer;
+}
+
+  // .card-select {
+  //   // display: flex;
+  //   // justify-content: space-between;
+  //   align-items: center;
+  //   background-color:#FFC65A";
+  //   color: whitesmoke;
+  //   // to have the "select part" at the bottom, not just after the overview"
+  //   margin-top: auto;
+  //  }
 
 
 

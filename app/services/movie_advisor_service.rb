@@ -59,7 +59,7 @@ class MovieAdvisorService
     # Prompt système : instructions données à l'IA sur son rôle, son profil et son format de réponse JSON.
     system_prompt = <<~PROMPT
       Tu es Chaplin, un assistant cinéma chaleureux et passionné.
-      Ton rôle est de recommander les films idéaux selon les préférences de l'utilisateur.
+      Ton rôle est de recommander 4 films idéaux selon les préférences de l'utilisateur.
 
       #{"Profil permanent de l'utilisateur :\n- #{user_profile_context}\n" if user_profile_context.present?}
       Critères de la recherche actuelle :

@@ -32,8 +32,8 @@ class ConversationsController < ApplicationController
       # We temporarily rename the conversation with last proposed film (until user selects one)
       # @conversation.title = "Dernière recommendation: #{movie["title"]}"
       # @conversation.save
-      string = "Dernière recommendation : #{movie['title']}"
-      @conversation.update(title: "Dernière recommendation: #{movie['title']}")
+      string = "Dernière recommandation : #{movie['title']}"
+      @conversation.update(title: "Dernière recommandation: #{movie['title']}")
 
       next unless tmdb_movie
 
