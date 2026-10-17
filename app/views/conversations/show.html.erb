@@ -124,9 +124,10 @@
 
               <div class="d-flex justify-content-center gap-3">
                 <%= link_to "Clore la conversation",
-                  conversation_path(@conversation),
+                  close_conversation_path(@conversation),
                   data: {
-                    turbo_method: :delete
+                    turbo_method: :patch,
+                    movie_modal_target: "closeLink"
                   },
                   class: "btn btn-warning text-white shadow-sm w-100 rounded-pill px-3 font-weight-bold"
                 %>

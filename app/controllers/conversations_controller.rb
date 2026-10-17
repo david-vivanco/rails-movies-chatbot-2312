@@ -32,8 +32,8 @@ class ConversationsController < ApplicationController
       # We temporarily rename the conversation with last proposed film (until user selects one)
       # @conversation.title = "Dernière recommendation: #{movie["title"]}"
       # @conversation.save
-      string = "Dernière recommandation : #{movie['title']}"
-      @conversation.update(title: "Dernière recommandation: #{movie['title']}")
+      # string = "Dernière recommandation : #{movie['title']}"
+      # @conversation.update(title: "Dernière recommandation: #{movie['title']}")
 
       next unless tmdb_movie
 
@@ -44,6 +44,19 @@ class ConversationsController < ApplicationController
         rating: tmdb_movie["vote_average"].round(1)
       }
     end.compact
+  end
+
+  def close
+    @conversation = current_user.conversations.find(params[:id])
+
+    if params[:selected_movie].present?
+      @conversation.update(
+        title: "🎬 #{params[:selected_movie]}"
+      )
+    end
+
+    redirect_to conversations_path,
+                notice: "Conversation clôturée"
   end
 
   def destroy

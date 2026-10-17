@@ -19,6 +19,10 @@ Rails.application.routes.draw do
       resources :messages, only:[:index, :create]
     end
   end
-  resources :conversations, only: [:index, :show, :destroy]
+  resources :conversations, only: [:index, :show, :destroy] do
+    member do
+      patch :close
+    end
+  end
   resource :profile, only: [:show, :edit, :update]
 end
