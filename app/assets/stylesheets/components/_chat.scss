@@ -12,17 +12,17 @@
 
 #exchanges {
    flex: 1; // allows it to grow
-  overflow-y: auto; // enables vertical scrolling when content overflows
-  padding: 1em; // optional, for aesthetic
+  overflow-y: visible; // auto supprimé : enables vertical scrolling when content overflows
+  padding: 0; // optional, for aesthetic
 }
 
-#new_message {
+//#new_message {
   /* keep default or set fixed height if needed */
   //padding: 1em;
   //background-color: #f1f1f1; // optional style
-}
+//}
 
-
+// #new_message et card_input étaient vides donc je les ai grisés
 
 
 // EACH MESSAGE FORMATTING
@@ -74,10 +74,10 @@
 }
 
 // NEW MESSAGE
-.card-input {
+//.card-input {
 
 
-}
+//}
 
 .search-form-control {
   position: relative;

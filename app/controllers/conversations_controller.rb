@@ -8,7 +8,8 @@ class ConversationsController < ApplicationController
     @conversation = Conversation.new(
       criteria: @criteria,
       user: current_user,
-      title: "Conversation du #{Time.current.strftime('%d/%m/%Y %H:%M')}"
+      # title: "Conversation du #{Time.current.strftime('%d/%m/%Y %H:%M')}"
+      title: "Pas de film selectionné"
     )
     if @conversation.save
       redirect_to conversation_path(@conversation)
@@ -29,11 +30,12 @@ class ConversationsController < ApplicationController
         movie["year"]
       ).call
 
+      Rails.logger.debug "Recherche TMDB : #{movie['title']} => #{tmdb_movie.present?}"
       # We temporarily rename the conversation with last proposed film (until user selects one)
       # @conversation.title = "Dernière recommendation: #{movie["title"]}"
       # @conversation.save
-      string = "Dernière recommendation : #{movie['title']}"
-      @conversation.update(title: "Dernière recommendation: #{movie['title']}")
+      # string = "Dernière recommandation : #{movie['title']}"
+      # @conversation.update(title: "Dernière recommandation: #{movie['title']}")
 
       next unless tmdb_movie
 
@@ -44,6 +46,19 @@ class ConversationsController < ApplicationController
         rating: tmdb_movie["vote_average"].round(1)
       }
     end.compact
+  end
+
+  def close
+    @conversation = current_user.conversations.find(params[:id])
+
+    if params[:selected_movie].present?
+      @conversation.update(
+        title: "🎬 #{params[:selected_movie]}"
+      )
+    end
+
+    redirect_to conversations_path,
+                notice: "Conversation clôturée"
   end
 
   def destroy

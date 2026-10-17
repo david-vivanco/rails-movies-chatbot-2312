@@ -1,0 +1,16 @@
+.hidden {
+  display: none !important;
+}
+
+.card-select {
+  cursor: pointer;
+  transition: 0.2s ease;
+
+  &:hover {
+    background-color: #FFC65A;
+    color: white;
+    transform: scale(1.03);
+  }
+}
+
+

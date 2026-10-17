@@ -2,7 +2,13 @@
   <%# TITLE %>
   <div class="text-center mb-4">
     <h1>🍿 Assistant Cinéma 🍿</h1>
-    <h2><%= @conversation.title %></h2>
+    <%# <div class="d-flex justify-content-center gap-3"> %>
+        <%# <%= link_to @conversation.title, %>
+            <%# conversation_path(@conversation), %>
+            <%# data: { turbo_method: :delete }, %>
+            <%# class: "btn btn-info text-white shadow-sm rounded-pill px-3 font-weight-bold" %>
+        <%# %> 
+    </div>
   </div>
 
   <div class="row gx-5">
@@ -16,7 +22,7 @@
 
         <div class = "row">
           <div class = "card-chaplin">
-            <p>🍿:  Voici mes recommendations d'après tes critères pour ta séance d'aujourd'hui. Si tu ne trouves pas ton bonheur, discutons davantage pour affiner la recherche...</p>
+            <p>🍿:  Voici mes recommandations d'après tes critères pour ta séance d'aujourd'hui. Si tu ne trouves pas ton bonheur, discutons davantage pour affiner la recherche...</p>
           </div>
 
           <% @conversation.messages.each do |message|  %>
@@ -51,37 +57,92 @@
     </div>
 
     <%# RIGHT SIDE for the recommendations %>
-    <div class ="col-md-6">
-      <div id = "recommendation" class = "mt-4">
-        <div class="text-center my-4">
-          <h5>🍿 Films recommendés par <strong>Chaplin</strong> 🍿</h5>
-        </div>
+
+    <div class = "col-md-6">
+      <div id="recommendation" class="pt-0">
+          <div class="text-center my-4">
+            <h5>🍿 Films recommandés par <strong>Chaplin</strong> 🍿</h5>
+          </div>
 
         <div id = "instructions" class = "text-center my-4">
           <p>Si tu trouves ton bonheur, <strong>sélectionne</strong> le film pour mettre fin à la conversation. Sinon, continue à parler avec <strong>Chaplin</strong>.</p>
         </div>
 
-        <div class="cards">
+        <%# remplace div class=cards pour permettre de selectionner un movie avec une modal%>
+        <div class="cards" data-controller="movie-modal">
 
           <% @movies.each do |movie| %>
-          <div class="card-movie">
-            <div class="card-select m-1 text-center">
-              <h2>SELECT</h2>
-            </div>
-              <%= image_tag movie[:poster_url], alt: movie[:title] %>
-            <div class="card-movie-infos">
-              <div>
-                <h2>
-                  <%= movie[:title] %>
-                <span class="fw-light"><%= movie[:rating] %></span>
-                <i class="fa-solid fa-star text-info fs-7"></i>
-                </h2>
-                <p><%= movie[:overview] %></p>
+            <div class="card-movie">
+
+              <div
+                class="card-select m-1 text-center"
+                data-action="click->movie-modal#open"
+                data-title="<%= movie[:title] %>"
+                data-poster="<%= movie[:poster_url] %>"
+              >
+                <h2>SELECT</h2>
               </div>
+
+                <%= image_tag movie[:poster_url], alt: movie[:title] %>
+
+              <div class="card-movie-infos">
+                <div>
+                  <h2>
+                    <%= movie[:title] %>
+                    <span class="fw-light"><%= movie[:rating] %></span>
+                    <i class="fa-solid fa-star text-info fs-7"></i>
+                  </h2>
+                  <p><%= movie[:overview] %></p>
+                </div>
+              </div>
+
             </div>
-          </div>
           <% end %>
 
+          <!-- MODALE -->
+
+          <div
+            data-movie-modal-target="modal"
+            class="d-none position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center"
+            style="background: rgba(0,0,0,.7); z-index: 9999;"
+          >
+
+            <div class="bg-white p-4 rounded text-center" style="max-width: 500px;">
+              <h2 class="mb-3"><strong>Excellent choix !</strong></h2>
+
+              <h3
+                data-movie-modal-target="title"
+                class="mb-3"
+              ></h3>
+
+              <img
+                data-movie-modal-target="poster"
+                src=""
+                class="img-fluid rounded mb-4"
+                style="max-height:300px;"
+              > <%#vérifier la source de l'image%>
+
+              <div class="d-flex justify-content-center gap-3">
+                <%= link_to "Clore la conversation",
+                  close_conversation_path(@conversation),
+                  data: {
+                    turbo_method: :patch,
+                    movie_modal_target: "closeLink"
+                  },
+                  class: "btn btn-warning text-white shadow-sm w-100 rounded-pill px-3 font-weight-bold"
+                %>
+
+                <button
+                  class="btn btn-info text-white shadow-sm w-100 rounded-pill px-3 font-weight-bold"
+                  data-action="click->movie-modal#close"
+                >
+                  Revenir à la recherche
+                </button>
+
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
     </div>
