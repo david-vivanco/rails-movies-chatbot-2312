@@ -1,0 +1,13 @@
+.hidden {
+  display: none !important;
+}
+
+.card-select {
+  cursor: pointer;
+
+  &:hover {
+    background-color: #0dcaf0;
+    color: white;
+    transition: 0.2s ease;
+  }
+}
