@@ -45,7 +45,7 @@
         <div id="chat_form" class="card-input mt-3 p-2" style="background:#f9f9f9; border-radius:10px;">
           <%= simple_form_for(@message, url: criteria_conversation_messages_path(@criteria, @conversation)) do |f| %>
             <div class="d-flex align-items-center">
-              <%= f.text_field :content, class: 'form-control rounded-pill' , placeholder: 'Type your message...' %>
+              <%= f.text_field :content, class: 'form-control rounded-pill' , placeholder: 'Ecris ton message...' %>
               <button type="submit" class="btn btn-flat ms-2" style="border-radius: 50%; width: 40px; height: 40px;">
                 <i class="fa fa-paper-plane" aria-hidden="true"></i>
               </button>

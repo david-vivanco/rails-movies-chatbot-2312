@@ -13,10 +13,10 @@
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <li class="nav-item active">
-            <%= link_to "Home", root_path, class: "nav-link" %>
+            <%= link_to "Accueil", root_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%= link_to "Conversations passées", conversations_path, class: "nav-link" %>
+            <%= link_to "Historique", conversations_path, class: "nav-link" %>
           </li>
           <li class="nav-item dropdown">
             <% if current_user.avatar_url.present? %>
