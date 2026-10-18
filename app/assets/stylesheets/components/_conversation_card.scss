@@ -1,10 +1,15 @@
-.conversation-card {
+a.conversation-card {
   display: flex;
   align-items: center;
-  margin-bottom: 8px;
   background: white;
   padding: 8px 16px;
-  border: 1px solid rgb(235,235,235);
+  border: 1px solid rgb(235, 235, 235);
+  color: inherit;
+  text-decoration: none;
+}
+
+a.conversation-card:hover {
+  background: rgb(248, 248, 248);
 }
 
 .conversation-card .conversation-card-content {
@@ -21,22 +26,23 @@
   color: #999999;
   font-weight: bold;
 }
-.conversation-card .conversation-card-actions {
+.conversation-item .conversation-card-actions {
   opacity: 0;
   display: flex;
   transition: ease .2s;
 }
 
-.conversation-card:hover .conversation-card-actions {
+.conversation-item:hover .conversation-card-actions {
   opacity: 1;
 }
 
-.conversation-card .conversation-card-actions a {
+.conversation-card-actions a {
   color: #999999;
   margin-left: 16px;
   font-size: 14px;
+  text-decoration: none;
 }
 
-.conversation-card .conversation-card-actions a:hover {
+.conversation-card-actions a:hover {
   color: #555555;
 }
