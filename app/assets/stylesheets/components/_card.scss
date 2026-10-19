@@ -55,9 +55,8 @@
   cursor: pointer;
 }
 
-#recommendation {
-  position: sticky;
-  top: 20px;
+#recommendation.sticky-top {
+  top: 120px;
 }
 
   // .card-select {
