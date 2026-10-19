@@ -59,6 +59,26 @@
   top: 120px;
 }
 
+.movie-overview {
+  margin: 0;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+
+  overflow: hidden;
+  line-height: 1.4;
+  max-height: 2.8em;
+}
+
+.movie-overview-full {
+  margin-top: 0.5rem;
+
+  display: block;
+  overflow: visible;
+  max-height: none;
+}
+
   // .card-select {
   //   // display: flex;
   //   // justify-content: space-between;

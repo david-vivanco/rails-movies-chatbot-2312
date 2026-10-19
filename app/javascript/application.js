@@ -4,13 +4,32 @@ import "controllers"
 import "@popperjs/core"
 import "bootstrap"
 
-// document.addEventListener("turbo:load", () => {
-//   const form = document.getElementById("new_message");
+document.addEventListener("turbo:load", () => {
+  const form = document.getElementById("new_message");
 
-//   if (form) {
-//     form.scrollIntoView();
-//   }
-// });
+  if (form) {
+    form.scrollIntoView();
+  }
+});
+
+document.addEventListener("turbo:load", () => {
+  document.querySelectorAll(".toggle-overview").forEach((link) => {
+    const target = document.querySelector(link.getAttribute("href"));
+    const shortOverview = link.previousElementSibling;
+
+    if (!target || !shortOverview) return;
+
+    target.addEventListener("show.bs.collapse", () => {
+      shortOverview.style.display = "none";
+      link.textContent = "Voir moins";
+    });
+
+    target.addEventListener("hide.bs.collapse", () => {
+      shortOverview.style.display = "block";
+      link.textContent = "Voir plus";
+    });
+  });
+});
 
 // document.addEventListener("turbo:load", () => {
 //   const form = document.getElementById("new_message");
@@ -31,13 +50,13 @@ import "bootstrap"
 //   }
 // });
 
-document.addEventListener("turbo:load", () => {
-const form = document.getElementById("new_message");
+// document.addEventListener("turbo:load", () => {
+// const form = document.getElementById("new_message");
 
-if (form) {
-window.scrollTo({
-top: form.offsetTop - 200,
-behavior: "auto"
-});
-}
-});
+// if (form) {
+// window.scrollTo({
+// top: form.offsetTop - 200,
+// behavior: "auto"
+// });
+// }
+// });

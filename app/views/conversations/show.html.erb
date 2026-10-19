@@ -97,10 +97,32 @@
                 <div>
                   <h2>
                     <%= movie[:title] %>
-                    <span class="fw-light"><%= movie[:rating] %></span>
-                    <i class="fa-solid fa-star text-info fs-7"></i>
+                    <span class="d-block fw-light"><%= movie[:rating] %>
+                    <i class="fa-solid fa-star text-info fs-7"></i></span>
                   </h2>
-                  <p><%= movie[:overview] %></p>
+
+                  <p class="movie-overview">
+                    <%= truncate(movie[:overview], length: 100) %>
+                  </p>
+
+                  <a
+                    class="toggle-overview"
+                    data-bs-toggle="collapse"
+                    href="#overview-<%= movie[:title].parameterize %>"
+                    role="button"
+                  >
+                    Voir plus
+                  </a>
+
+                  <div
+                    class="collapse"
+                    id="overview-<%= movie[:title].parameterize %>"
+                  >
+                    <p class="movie-overview-full">
+                      <%= movie[:overview] %>
+                    </p>
+                  </div>
+
                 </div>
               </div>
 
