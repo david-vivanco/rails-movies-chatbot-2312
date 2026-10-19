@@ -50,8 +50,11 @@
   // vertical-align: middle;
 
   //Option 4:
-  p {
-    @extend .pt-3;  // manually adjusting the text to be centered vertically
+  // p {
+  // @extend .pt-3;  // manually adjusting the text to be centered vertically
+  // }
+    p {
+  margin-bottom: 0.25rem;
   }
 }
 
@@ -72,6 +75,8 @@
   }
 
 }
+
+
 
 // NEW MESSAGE
 //.card-input {

@@ -31,8 +31,11 @@
                 <p><strong> YOU : </strong><%= message.content %></p>
               </div>
             <% elsif message.sender == "AI" %>
-              <div class = "card-chaplin">
-                <p>🍿: <%= message.content %> </p>
+              <div class = "card-chaplin d-flex">
+                <span class="me-2">🍿:</span>
+                <div>
+                   <%= markdown(message.content) %>
+                </div>
               </div>
             <% end %>
           <% end %>
