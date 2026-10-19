@@ -46,6 +46,11 @@ class ConversationsController < ApplicationController
         rating: tmdb_movie["vote_average"].round(1)
       }
     end.compact
+
+    # Renomme avec le dernier film recommandé, sauf si un film a déjà été choisi
+    return unless @movies.any? && !@conversation.title.start_with?("🎬")
+
+    @conversation.update(title: "Dernière recommandation : #{@movies.last[:title]}")
   end
 
   def close

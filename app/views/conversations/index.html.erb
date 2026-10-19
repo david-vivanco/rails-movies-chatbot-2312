@@ -14,16 +14,18 @@
 <div class="container mt-3 mb-4">
   <% if @conversations.any?  %>
     <% @conversations.each do |conversation| %>
-    <div class="conversation-card">
+    <div class="conversation-item">
+      <%= link_to conversation_path(conversation), class: "conversation-card" do %>
       <p class="fs-2">🍿</p>
         <div class="conversation-card-content">
           <p><small><%= conversation.started_on %></small></p>
           <p><%= truncate(conversation.title, length: 80) %></p>
-      </div>
+        </div>
+      <% end %>
       <%# where is conversation.summary created? %>
       <div class="conversation-card-actions">
           <%= link_to conversation_path(conversation), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Supprimer cette recherche ?" } do %>
-            Delete <i class="far fa-trash-alt"></i>
+            Supprimer <i class="far fa-trash-alt"></i>
           <% end %>
       </div>
     </div>

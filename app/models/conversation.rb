@@ -8,6 +8,6 @@ class Conversation < ApplicationRecord
   end
 
   def started_on
-    created_at.strftime("%d %B %Y") # "9 January"
+    created_at.in_time_zone("Paris").strftime("%d %B %Y") # "9 January"
   end
 end
