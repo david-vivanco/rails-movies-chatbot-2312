@@ -16,6 +16,12 @@
             <%= link_to "Accueil", root_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
+            <%= link_to "Mon profil", profile_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Recherche", new_criteria_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
             <%= link_to "Historique", conversations_path, class: "nav-link" %>
           </li>
           <li class="nav-item dropdown">
@@ -29,7 +35,7 @@
               </span>
             <% end %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Mon Profil", profile_path, class: "dropdown-item" %>
+              <%# <%= link_to "Mon Profil", profile_path, class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
             </div>
           </li>

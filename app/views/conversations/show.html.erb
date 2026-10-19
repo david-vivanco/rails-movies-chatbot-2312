@@ -1,7 +1,7 @@
 <div class="container my-5">
   <%# TITLE %>
   <div class="text-center mb-4">
-    <h1>🍿 Assistant Cinéma 🍿</h1>
+    <h1>🍿 Chaplin, ton assistant Cinéma 🍿</h1>
     <%# <div class="d-flex justify-content-center gap-3"> %>
         <%# <%= link_to @conversation.title, %>
             <%# conversation_path(@conversation), %>
@@ -15,15 +15,15 @@
     <%# LEFT SIDE for the chatbot %>
     <div id = "chat" class ="col-md-6 chat-container">
       <%# The exchanges "index" %>
-      <div id="exchanges">
-        <div class="my-4">
-          <h5>🍿 Bonjour, je suis <strong>Chaplin</strong>, ton assistant cinéma</h5>
-        </div>
+      <div id="exchanges" class="pt-5">
+        <%# <div class="my-4">
+          <%# <h5>🍿 Bonjour, je suis <strong>Chaplin</strong>, ton assistant cinéma</h5> %>
+        <%# </div> %>
 
         <div class = "row">
-          <div class = "card-chaplin">
-            <p>🍿:  Voici mes recommandations d'après tes critères pour ta séance d'aujourd'hui. Si tu ne trouves pas ton bonheur, discutons davantage pour affiner la recherche...</p>
-          </div>
+          <%# <div class = "card-chaplin"> %>
+          <%# <p>🍿:  Voici mes recommandations d'après tes critères pour ta séance d'aujourd'hui. Si tu ne trouves pas ton bonheur, discutons davantage pour affiner la recherche...</p>%>
+          <%# </div> %>
 
           <% @conversation.messages.each do |message|  %>
             <% if message.sender == "user" %>
@@ -40,6 +40,7 @@
             <% end %>
           <% end %>
         </div>
+
 
       </div>
 
@@ -59,15 +60,19 @@
 
     </div>
 
+
+
     <%# RIGHT SIDE for the recommendations %>
 
     <div class = "col-md-6">
-      <div id="recommendation" class="pt-0">
-          <div class="text-center my-4">
-            <h5>🍿 Films recommandés par <strong>Chaplin</strong> 🍿</h5>
-          </div>
 
-        <div id = "instructions" class = "text-center my-4">
+      <%# <div class="text-center my-4">
+         <%# <h5>🍿 Films recommandés par <strong>Chaplin</strong> 🍿</h5> %>
+      <%# </div> %>
+
+      <div id="recommendation" class="sticky-top"> <%#class="pt-0"%>
+
+        <div id = "instructions" class = "text-center mt-0 mb-4"> <%#my-4%>
           <p>Si tu trouves ton bonheur, <strong>sélectionne</strong> le film pour mettre fin à la conversation. Sinon, continue à parler avec <strong>Chaplin</strong>.</p>
         </div>
 
@@ -150,4 +155,5 @@
       </div>
     </div>
   </div>
+  <%# <div id="bottom"></div>  ancre pour garder la page en bas%>
 </div>
