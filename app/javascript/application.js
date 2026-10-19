@@ -4,10 +4,40 @@ import "controllers"
 import "@popperjs/core"
 import "bootstrap"
 
-document.addEventListener("turbo:load", () => {
-  const form = document.getElementById("new_message");
+// document.addEventListener("turbo:load", () => {
+//   const form = document.getElementById("new_message");
 
-  if (form) {
-    form.scrollIntoView();
-  }
+//   if (form) {
+//     form.scrollIntoView();
+//   }
+// });
+
+// document.addEventListener("turbo:load", () => {
+//   const form = document.getElementById("new_message");
+
+//   if (form) {
+//     window.scrollTo({
+//       top: form.offsetTop - 200,
+//       behavior: "auto"
+//     });
+//   }
+// });
+
+// document.addEventListener("turbo:load", () => {
+//   const exchanges = document.getElementById("exchanges");
+
+//   if (exchanges) {
+//     exchanges.lastElementChild?.scrollIntoView();
+//   }
+// });
+
+document.addEventListener("turbo:load", () => {
+const form = document.getElementById("new_message");
+
+if (form) {
+window.scrollTo({
+top: form.offsetTop - 200,
+behavior: "auto"
+});
+}
 });
