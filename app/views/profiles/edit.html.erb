@@ -17,10 +17,15 @@
         <label class="form-label fw-bold">Choisis ton avatar</label>
         <div class="d-flex gap-2">
           <% User::AVATARS.each do |emoji| %>
-            <label class="btn btn-outline-secondary rounded-circle d-flex align-items-center justify-content-center" style="width: 48px; height: 48px; font-size: 1.5rem;">
-              <%= f.radio_button :avatar_url, emoji, class: "d-none" %>
-              <%= emoji %>
-            </label>
+            <%= f.radio_button :avatar_url,
+                   emoji,
+                   id: "avatar_#{emoji.ord}",
+                   class: "avatar-radio" %>
+              <label
+                for="avatar_<%= emoji.ord %>"
+                class="avatar-choice rounded-circle d-flex align-items-center justify-content-center">
+                <%= emoji %>
+              </label>
           <% end %>
         </div>
       </div>
