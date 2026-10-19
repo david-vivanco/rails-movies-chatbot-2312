@@ -10,7 +10,7 @@ class MessagesController < ApplicationController
     if @message.save
       # Appel de notre service IA : il génère la recommandation et crée le message assistant en DB
       # MovieAdvisorService.new(@conversation).call # We are now calling this from the conversation_show
-      redirect_to conversation_path(@conversation)
+      redirect_to conversation_path(@conversation) # anchor: "bottom"
     else
       render "conversations/show", status: :unprocessable_entity
     end

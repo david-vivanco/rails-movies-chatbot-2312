@@ -2,18 +2,28 @@
 @import "bootstrap";
 
 // THE CHAT CONTAINER
+// #chat {
+//   display: flex;
+//   flex-direction: column;
+//   height: calc(100vh - 180px);
+// }
 
+// #exchanges {
+//   flex: 1;
+//   overflow-y: auto;
+//   padding-right
 
 #chat {
-  display: flex;
-  flex-direction: column;
-  height: 100%; // or a specific height like 500px
+  display: block; // flex;
+  // flex-direction: column;
+  // height: calc(100vh - 180px);
+  //height: 100%; // or a specific height like 500px
 }
 
 #exchanges {
-   flex: 1; // allows it to grow
-  overflow-y: visible; // auto supprimé : enables vertical scrolling when content overflows
-  padding: 0; // optional, for aesthetic
+  // flex: 1; // allows it to grow
+  overflow-y: visible; //visible; // auto supprimé : enables vertical scrolling when content overflows
+  // padding-right: 0; // optional, for aesthetic
 }
 
 //#new_message {
@@ -50,8 +60,11 @@
   // vertical-align: middle;
 
   //Option 4:
-  p {
-    @extend .pt-3;  // manually adjusting the text to be centered vertically
+  // p {
+  // @extend .pt-3;  // manually adjusting the text to be centered vertically
+  // }
+    p {
+  margin-bottom: 0.25rem;
   }
 }
 
@@ -72,6 +85,8 @@
   }
 
 }
+
+
 
 // NEW MESSAGE
 //.card-input {

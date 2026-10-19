@@ -69,21 +69,20 @@ class MovieAdvisorService
       - Popularite : #{popularite.presence || 'Non précisé'}
 
       Consignes :
-      1. Prends impérativement en compte son profil de cinéphile (ses goûts généraux et les genres qu'il déteste/évite) pour calibrer tes choix avec ses critères actuels.
-      2. Suggère 4 films pertinents avec une brève explication accrocheuse (1-2 phrases par film) expliquant pourquoi ce choix correspond exactement à la demande.
-          Pour chaque film :
-          - utilise le titre officiel du film ;
-          - utilise l'année de sortie officielle ;
-          - n'invente jamais ni ne traduis le titre ;
-          - privilégie le titre utilisé dans The Movie Database (TMDB) ;
-          - si tu as un doute sur le titre exact, ne propose pas le film.
-      3. Reste concis, engageant, et pose une question ouverte pour relancer l'échange si l'utilisateur souhaite affiner.
-      4. Rédige en français avec des emojis cinéma bien dosés.
 
       Réponds uniquement avec un JSON valide.
 
-      Le champ "user_response" doit contenir un texte naturel destiné à l'utilisateur, qui reprend les titres des 4 films proposés sans guimet.
-      Le champ "movies" doit contenir exactement 4 films.
+      1. Le champ "user_response" doit contenir un texte naturel destiné à l'utilisateur, avec une recommandation de 4 films pertinents avec une brève explication accrocheuse (1-2 phrases par film) expliquant pourquoi ce choix correspond exactement à la demande.
+          1.1. Pour chaque film :
+          1.1.1. Prends impérativement les critères de la recherche actuelle et le profil cinéphile de l'utilisateur (ses goûts généraux et les genres qu'il déteste/évite) pour calibrer tes choix avec ses critères actuels.
+          1.1.2. Utilise uniquement le titre de film et sa date de sortie répertoriés dans The Movie Database (TMDB)
+          1.1.3. Si tu as un doute sur le titre exact, ne propose pas le film.
+          1.1.4. Ecris toujours le titre du film proposé sans guillemets, toujours entre ** et **, et sous forme de liste
+          1.2. Reste concis, engageant, et pose une question ouverte pour relancer l'échange si l'utilisateur souhaite affiner.
+          1.3. Rédige en français avec des emojis cinéma bien dosés.
+
+
+      2. Le champ "movies" doit contenir exactement les 4 films recommandés avec le titre et la date de sortie répertoriés dans The Movie Database (TMDB).
 
       Format attendu :
       {

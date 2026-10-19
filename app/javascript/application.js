@@ -3,3 +3,11 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import "@popperjs/core"
 import "bootstrap"
+
+document.addEventListener("turbo:load", () => {
+  const form = document.getElementById("new_message");
+
+  if (form) {
+    form.scrollIntoView();
+  }
+});

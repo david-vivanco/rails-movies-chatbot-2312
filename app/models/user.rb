@@ -19,7 +19,7 @@ class User < ApplicationRecord
     "Manga / Anime", "Policier", "Romance", "Science-Fiction", "Thriller"
   ].freeze
 
-  AVATARS = ["🍿", "🎬", "📽️", "🎞️", "🕶️", "🎥"].freeze
+  AVATARS = ["🎬", "📽️", "🎞️", "🕶️", "🎥"].freeze
 
   before_save :generate_user_prompt
 

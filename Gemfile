@@ -51,6 +51,7 @@ gem "sassc-rails"
 gem "json", "<3"
 gem "devise"
 gem "ruby-openai"
+gem "commonmarker" # pour le markdown
 
 group :development, :test do
   gem "dotenv-rails"
