@@ -2,7 +2,7 @@ a.conversation-card {
   display: flex;
   align-items: center;
   background: white;
-  padding: 8px 16px;
+  padding: 16px;
   border: 1px solid rgb(235, 235, 235);
   color: inherit;
   text-decoration: none;
@@ -12,9 +12,11 @@ a.conversation-card:hover {
   background: rgb(248, 248, 248);
 }
 
+
 .conversation-card .conversation-card-content {
   flex-grow: 1;
-  padding: 0 24px;
+  padding: 0 48px 0 48px;
+  margin : 0 auto;
 }
 
 .conversation-card p {
