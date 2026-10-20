@@ -30,10 +30,24 @@ class MovieAdvisorService
 
     # 3. Persistance en base de données : on crée le nouveau message associé à la conversation.
     # sender: "AI" permet à la vue conversations/show d'identifier et d'afficher le message de Chaplin.
-    @conversation.messages.create!(
-      sender: "AI",
-      content: cards["user_response"]
-    )
+
+    last_message = Message.where(conversation_id: @conversation.id).order(id: :asc).last
+
+    if last_message.nil?
+      # if this is the first message, go ahead and publish it
+      @conversation.messages.create!(
+        sender: "AI",
+        content: cards["user_response"]
+      )
+    elsif cards["user_response"] == last_message.content
+      # if the new message is equal to the last, do not create a message
+    else
+      # if the new message is different to the last, create a message
+      @conversation.messages.create!(
+        sender: "AI",
+        content: cards["user_response"]
+      )
+    end
 
     # Retourne le hash complet { "user_response" => "...", "movies" => [...] }
     cards
