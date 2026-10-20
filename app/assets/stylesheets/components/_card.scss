@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 16px;
+    align-items: start;
   }
 // see below options for smaller screens
 
@@ -12,7 +13,7 @@
     // to have the "select part" at the bottom, not just after the overview"
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: auto; //100%;
   }
 
   .card-movie > img {
@@ -57,6 +58,26 @@
 
 #recommendation.sticky-top {
   top: 120px;
+}
+
+.movie-overview {
+  margin: 0;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+
+  overflow: hidden;
+  line-height: 1.4;
+  max-height: 2.8em;
+}
+
+.movie-overview-full {
+  margin-top: 0.5rem;
+
+  display: block;
+  overflow: visible;
+  max-height: none;
 }
 
   // .card-select {
