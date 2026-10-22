@@ -48,7 +48,7 @@ gem "autoprefixer-rails"
 gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
-gem "json", "<3"
+gem "json", "<4"
 gem "devise"
 gem "ruby-openai"
 gem "commonmarker" # pour le markdown
